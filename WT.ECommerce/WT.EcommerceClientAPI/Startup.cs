@@ -30,7 +30,7 @@ namespace WT.EcommerceClientAPI
                 {
                     config.Authority = "https://localhost:44365/";
 
-                    config.Audience = "WT.EcommerceProxyAPI";
+                    config.Audience = "WT.EcommerceClientAPI";
                     //here we identify what resurces trying to pass this token for authontication
                 });
             services.AddHttpClient();

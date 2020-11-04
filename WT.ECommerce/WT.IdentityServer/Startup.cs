@@ -20,7 +20,12 @@ namespace WT.IdentityServer
             //Identity server setup infrustructer to use OpenId connect 
             //Identity server is something simmilar to identity the way identity provides for us getting users , authonticating users,roles,claims...
             //Identity server provides for use infrastructure for OAuth,OpeniId connect , here our infrastructure is clients,apis,scopes... 
+
+            //IdentityServer4 docs: http://docs.identityserver.io/en/latest/
+            //OAauth Specification: https://tools.ietf.org/html/rfc6749
+            //OIDC Specifications: https://openid.net/specs/openid-conne...
             services.AddIdentityServer()
+                .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                 .AddInMemoryApiScopes(Configuration.GetApiScopes())
                 .AddInMemoryApiResources(Configuration.GetApis())
                 .AddInMemoryClients(Configuration.GetClient())
