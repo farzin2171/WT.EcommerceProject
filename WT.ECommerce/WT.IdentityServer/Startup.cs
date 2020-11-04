@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WT.IdentityServer.Data;
 using WT.IdentityServer.Helper;
 
 namespace WT.IdentityServer
@@ -16,6 +19,30 @@ namespace WT.IdentityServer
       
         public void ConfigureServices(IServiceCollection services)
         {
+            //Identity Part
+            services.AddDbContext<AppDbContext>(config =>
+            {
+                config.UseInMemoryDatabase("Memory");
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            {
+                config.Password.RequiredLength = 4;
+                config.Password.RequireDigit = false;
+                config.Password.RequireUppercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "IdentityServer.Cookie";
+                config.LoginPath = "/Auth/Login";
+            });
+
+
             //This will include Authontication and Authorization
             //Identity server setup infrustructer to use OpenId connect 
             //Identity server is something simmilar to identity the way identity provides for us getting users , authonticating users,roles,claims...
@@ -45,6 +72,7 @@ namespace WT.IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
 
             app.UseRouting();
 

@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace WT.IdentityServer
 {
@@ -13,7 +9,15 @@ namespace WT.IdentityServer
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var hostbuilder = CreateHostBuilder(args).Build();
+            using (var scope = hostbuilder.Services.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var user = new IdentityUser("Admin");
+                userManager.CreateAsync(user, "admin").GetAwaiter().GetResult();
+
+            }
+            hostbuilder.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
