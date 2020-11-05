@@ -52,6 +52,7 @@ namespace WT.IdentityServer
             //OAauth Specification: https://tools.ietf.org/html/rfc6749
             //OIDC Specifications: https://openid.net/specs/openid-conne...
             services.AddIdentityServer()
+                .AddAspNetIdentity<IdentityUser>()  //with this identity server is aware of model for the user . Dependency between Identity package and identity server
                 .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                 .AddInMemoryApiScopes(Configuration.GetApiScopes())
                 .AddInMemoryApiResources(Configuration.GetApis())

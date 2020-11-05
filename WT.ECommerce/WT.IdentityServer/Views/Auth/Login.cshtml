@@ -4,6 +4,7 @@
 }
     <div class="login-form">
         <form asp-controller="Auth" asp-action="Login" method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
             <h2 class="text-center">Log in</h2>
             <div class="form-group">
                 <input asp-for="UserName" class="form-control" placeholder="Username" required="required" />
@@ -19,6 +20,6 @@
                 <a href="#" class="float-right">Forgot Password?</a>
             </div>
         </form>
-        <p class="text-center"><a href="#">Create an Account</a></p>
+        <p class="text-center"><a asp-controller="Auth" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Create an Account</a></p>
     </div>
 

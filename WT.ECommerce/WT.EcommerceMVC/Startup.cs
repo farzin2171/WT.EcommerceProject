@@ -34,10 +34,12 @@ namespace WT.EcommerceMVC
                     config.ClientId = "WT.EcommerceClient_MVC";
                     config.ClientSecret = "WT.EcommerceClient_MVC_secret";
                     config.SaveTokens = true;
-                    config.Authority = "http://localhost:51539/";
-                    config.RequireHttpsMetadata = false;
-
+                    config.Authority = "https://localhost:44355/";
                     config.ResponseType = "code";
+
+                    // configure scope
+                    config.Scope.Clear();
+                    config.Scope.Add("openid");
                 });
             services.AddControllersWithViews();
         }

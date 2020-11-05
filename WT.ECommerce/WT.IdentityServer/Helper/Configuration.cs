@@ -61,12 +61,14 @@ namespace WT.IdentityServer.Helper
                     ClientId="WT.EcommerceClient_MVC",
                     ClientSecrets={new Secret("WT.EcommerceClient_MVC_secret".ToSha256())},
                     AllowedGrantTypes=GrantTypes.Code,
-                    RedirectUris={ "http://localhost:49354/signin-oidc" },
+                    RedirectUris={ "https://localhost:44383/signin-oidc" },
                     //Scapes means what can this access token used for 
-                    AllowedScopes={ "EcommerceAdminAPI.admin", "EcommerceClientAPI.admin","openid","profile" }
+                    AllowedScopes={ "EcommerceAdminAPI.admin", "EcommerceClientAPI.admin","openid","profile" },
                     //It means this client can have access to this api
+                    RequireConsent=false
                     
                 }
+                 
             };
 
 
