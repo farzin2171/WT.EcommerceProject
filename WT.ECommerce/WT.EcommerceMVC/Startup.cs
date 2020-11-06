@@ -54,6 +54,8 @@ namespace WT.EcommerceMVC
                     config.Scope.Add("WT.scope");
                     config.Scope.Add("EcommerceAdminAPI.admin");
                     config.Scope.Add("EcommerceClientAPI.admin");
+                    config.Scope.Add("offline_access");  //for request rfresh token
+
 
 
 

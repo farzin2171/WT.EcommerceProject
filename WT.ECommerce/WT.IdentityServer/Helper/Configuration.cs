@@ -83,8 +83,27 @@ namespace WT.IdentityServer.Helper
                     RequireConsent=false,
                     //Puts all the claimes in the id token
                     //AlwaysIncludeUserClaimsInIdToken=true
+                    AllowOfflineAccess=true
                     
-                }
+                },
+                 new Client
+                 {
+                    ClientId="WT.EcommerceClient_JS",
+                    AllowedGrantTypes=GrantTypes.Implicit,
+                    RequireClientSecret=false,
+                    RequirePkce=true,
+                    RedirectUris={ "https://localhost:44383/Home/signIn" },
+                    AllowedCorsOrigins={"https://localhost:44383"},
+                     AllowedScopes={
+                                     "EcommerceAdminAPI.admin",
+                                     "EcommerceClientAPI.admin",
+                                     IdentityServerConstants.StandardScopes.OpenId,
+                                     IdentityServerConstants.StandardScopes.Profile,
+                                     "WT.scope"
+                                   },
+                     RequireConsent=false,
+                     AllowAccessTokensViaBrowser=true,
+                 }
                  
             };
 

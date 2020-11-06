@@ -23,6 +23,7 @@ namespace WT.EcommerceAdminAPI
                      config.Audience = "WT.EcommerceAdminAPI";
                      //here we identify what resurces trying to pass this token for authontication
                  });
+            services.AddCors(config => config.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
             services.AddControllers();
         }
 
@@ -34,7 +35,7 @@ namespace WT.EcommerceAdminAPI
             }
 
             app.UseRouting();
-
+            app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
 

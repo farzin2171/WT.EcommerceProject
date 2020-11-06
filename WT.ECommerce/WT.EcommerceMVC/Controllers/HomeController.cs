@@ -30,6 +30,14 @@ namespace WT.EcommerceMVC.Controllers
         {
             return View();
         }
+        public IActionResult OidcPage()
+        {
+            return View();
+        }
+        public IActionResult SignIn()
+        {
+            return View();
+        }
 
         [Authorize]
         public async Task<IActionResult> Secret()
@@ -46,6 +54,7 @@ namespace WT.EcommerceMVC.Controllers
 
             return View();
         }
+
         private async Task<string> GetSecret(string accessToken)
         {
             var apiClient = _httpClientFactory.CreateClient();
