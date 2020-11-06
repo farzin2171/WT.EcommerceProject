@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
 
 namespace WT.IdentityServer
 {
@@ -15,6 +16,9 @@ namespace WT.IdentityServer
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
                 var user = new IdentityUser("Admin");
                 userManager.CreateAsync(user, "admin").GetAwaiter().GetResult();
+
+                userManager.AddClaimAsync(user, new Claim("WT.level", "1")).GetAwaiter().GetResult();
+                userManager.AddClaimAsync(user, new Claim("WT.api.level", "1")).GetAwaiter().GetResult();
 
             }
             hostbuilder.Run();

@@ -15,6 +15,7 @@ namespace WT.EcommerceAdminAPI.Controllers
     {
         public IActionResult Index()
         {
+            var claims = User.Claims.ToList();
             return Ok("secret message from EcommerceAdminAPI");
         }
     }

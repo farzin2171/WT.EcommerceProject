@@ -1,4 +1,5 @@
 ﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,15 @@ namespace WT.IdentityServer.Helper
             new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResource
+                {
+                    Name="WT.scope",
+                    UserClaims =
+                    {
+                        "WT.level"
+                    }
+                }
             };
 
         //There are two types of scopes
@@ -35,7 +44,7 @@ namespace WT.IdentityServer.Helper
         //This list shows api's in the system
         public static IEnumerable<ApiResource> GetApis() =>
             new List<ApiResource> { new ApiResource("WT.EcommerceAdminAPI") 
-                                                    { Scopes = { "EcommerceAdminAPI.admin" } },
+                                                    { Scopes = { "EcommerceAdminAPI.admin" },UserClaims={ "WT.api.level"} },
                                     new ApiResource("WT.EcommerceClientAPI")
                                                     { Scopes = { "EcommerceClientAPI.admin" } }
                                   };
@@ -63,9 +72,17 @@ namespace WT.IdentityServer.Helper
                     AllowedGrantTypes=GrantTypes.Code,
                     RedirectUris={ "https://localhost:44383/signin-oidc" },
                     //Scapes means what can this access token used for 
-                    AllowedScopes={ "EcommerceAdminAPI.admin", "EcommerceClientAPI.admin","openid","profile" },
+                    AllowedScopes={ 
+                                     "EcommerceAdminAPI.admin",
+                                     "EcommerceClientAPI.admin",
+                                     IdentityServerConstants.StandardScopes.OpenId,
+                                     IdentityServerConstants.StandardScopes.Profile,
+                                     "WT.scope"
+                                   },
                     //It means this client can have access to this api
-                    RequireConsent=false
+                    RequireConsent=false,
+                    //Puts all the claimes in the id token
+                    //AlwaysIncludeUserClaimsInIdToken=true
                     
                 }
                  

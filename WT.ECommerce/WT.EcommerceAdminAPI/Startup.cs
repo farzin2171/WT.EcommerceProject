@@ -18,7 +18,7 @@ namespace WT.EcommerceAdminAPI
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", config =>
                  {
-                     config.Authority = "https://localhost:44365/";
+                     config.Authority = "https://localhost:44355/";
 
                      config.Audience = "WT.EcommerceAdminAPI";
                      //here we identify what resurces trying to pass this token for authontication

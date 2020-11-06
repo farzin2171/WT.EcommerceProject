@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication;
 
 namespace WT.EcommerceMVC
 {
@@ -37,10 +38,27 @@ namespace WT.EcommerceMVC
                     config.Authority = "https://localhost:44355/";
                     config.ResponseType = "code";
 
+
+                    // configure cookie claim mapping
+                    config.ClaimActions.DeleteClaim("amr");
+                    config.ClaimActions.DeleteClaim("s_hash");
+                    config.ClaimActions.MapUniqueJsonKey("WT.level", "WT.level");
+
+                    //this send anoher request to get user's claims but the id token is smaller
+                    config.GetClaimsFromUserInfoEndpoint = true;
+
                     // configure scope
                     config.Scope.Clear();
                     config.Scope.Add("openid");
+                    config.Scope.Add("profile");
+                    config.Scope.Add("WT.scope");
+                    config.Scope.Add("EcommerceAdminAPI.admin");
+                    config.Scope.Add("EcommerceClientAPI.admin");
+
+
+
                 });
+            services.AddHttpClient();
             services.AddControllersWithViews();
         }
 
