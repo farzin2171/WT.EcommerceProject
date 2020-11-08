@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WT.IdentityServer.Data;
@@ -16,13 +17,20 @@ namespace WT.IdentityServer
 {
     public class Startup
     {
-      
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
             //Identity Part
             services.AddDbContext<AppDbContext>(config =>
             {
-                config.UseInMemoryDatabase("Memory");
+                //config.UseInMemoryDatabase("Memory");
+                config.UseSqlServer(connectionString);
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
@@ -42,6 +50,7 @@ namespace WT.IdentityServer
                 config.LoginPath = "/Auth/Login";
             });
 
+            var assembly = typeof(Startup).Assembly.GetName().Name;
 
             //This will include Authontication and Authorization
             //Identity server setup infrustructer to use OpenId connect 
@@ -53,12 +62,22 @@ namespace WT.IdentityServer
             //OIDC Specifications: https://openid.net/specs/openid-conne...
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()  //with this identity server is aware of model for the user . Dependency between Identity package and identity server
-                .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
-                .AddInMemoryApiScopes(Configuration.GetApiScopes())
-                .AddInMemoryApiResources(Configuration.GetApis())
-                .AddInMemoryClients(Configuration.GetClient())
+                                                    //.AddInMemoryIdentityResources(Configuration.GetIdentityResources())
+                                                    //.AddInMemoryApiScopes(Configuration.GetApiScopes())
+                                                    //.AddInMemoryApiResources(Configuration.GetApis())
+                                                    //.AddInMemoryClients(Configuration.GetClient())
+                 .AddConfigurationStore(options =>
+                 {
+                     options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                         sql => sql.MigrationsAssembly(assembly));
+                 })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                     sql => sql.MigrationsAssembly(assembly));
+                })
                 .AddDeveloperSigningCredential();
-            services.AddControllersWithViews();
+                services.AddControllersWithViews();
 
             //https://localhost:44365/.well-known/openid-configuration
             //Openid connect is an extention on top of Oauth and Identity server is an OpenId implimentation, which is OAuth included but more
