@@ -103,6 +103,7 @@ namespace WT.IdentityServer.Helper
                                    },
                      RequireConsent=false,
                      AllowAccessTokensViaBrowser=true,
+                     AccessTokenLifetime=1
                  }
                  
             };

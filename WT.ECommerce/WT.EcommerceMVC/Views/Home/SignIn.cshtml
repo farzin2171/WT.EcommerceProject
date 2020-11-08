@@ -1,7 +1,8 @@
 ﻿<script src="~/lib/oidc-client/oidc-client.min.js"></script>
 <script>
+
     var userManger = new Oidc.UserManager({
-        userStore: new Oidc.WebStorageStateStore({ store: window.localStorage })
+        userStore: new Oidc.WebStorageStateStore({ store: window.localStorage })  //here we say to Oidc where to save it
     });
     userManger.signinCallback().then(res => {
         console.log(res);
