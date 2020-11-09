@@ -48,6 +48,8 @@ namespace WT.IdentityServer
             {
                 config.Cookie.Name = "IdentityServer.Cookie";
                 config.LoginPath = "/Auth/Login";
+                config.LogoutPath = "/Auth/Logout";
+
             });
 
             var assembly = typeof(Startup).Assembly.GetName().Name;

@@ -38,6 +38,10 @@ namespace WT.EcommerceMVC.Controllers
         {
             return View();
         }
+        public IActionResult LogOut()
+        {
+            return SignOut("Cookie", "oidc");
+        }
 
         [Authorize]
         public async Task<IActionResult> Secret()

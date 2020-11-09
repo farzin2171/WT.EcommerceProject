@@ -71,6 +71,8 @@ namespace WT.IdentityServer.Helper
                     ClientSecrets={new Secret("WT.EcommerceClient_MVC_secret".ToSha256())},
                     AllowedGrantTypes=GrantTypes.Code,
                     RedirectUris={ "https://localhost:44383/signin-oidc" },
+                    PostLogoutRedirectUris={ "https://localhost:44383/Home/Index" },
+
                     //Scapes means what can this access token used for 
                     AllowedScopes={ 
                                      "EcommerceAdminAPI.admin",
@@ -93,8 +95,9 @@ namespace WT.IdentityServer.Helper
                     RequireClientSecret=false,
                     RequirePkce=true,
                     RedirectUris={ "https://localhost:44383/Home/signIn" },
+                    PostLogoutRedirectUris={ "https://localhost:44383/Home/Index" },
                     AllowedCorsOrigins={"https://localhost:44383"},
-                     AllowedScopes={
+                    AllowedScopes={
                                      "EcommerceAdminAPI.admin",
                                      "EcommerceClientAPI.admin",
                                      IdentityServerConstants.StandardScopes.OpenId,

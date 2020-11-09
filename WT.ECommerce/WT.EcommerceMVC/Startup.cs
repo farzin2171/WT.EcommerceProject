@@ -37,6 +37,7 @@ namespace WT.EcommerceMVC
                     config.SaveTokens = true;
                     config.Authority = "https://localhost:44355/";
                     config.ResponseType = "code";
+                    config.SignedOutCallbackPath = "/Home/Index";
 
 
                     // configure cookie claim mapping

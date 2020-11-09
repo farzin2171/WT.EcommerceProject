@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WT.IdentityServer.ViewModels;
@@ -12,16 +13,33 @@ namespace WT.IdentityServer.Controllers
     {
         private  readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IIdentityServerInteractionService _identityServerInteractionService;
 
         public AuthController(SignInManager<IdentityUser> signInManager,
-                              UserManager<IdentityUser> userManager)
+                              UserManager<IdentityUser> userManager,
+                              IIdentityServerInteractionService identityServerInteractionService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _identityServerInteractionService = identityServerInteractionService;
         }
+        [HttpGet]
         public IActionResult Login(string returnUrl)
         {
             return View(new LoginViewModel { ReturnUrl=returnUrl} );
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout(string logoutId)
+        {
+            await _signInManager.SignOutAsync();
+            var logoutRequest = await _identityServerInteractionService.GetLogoutContextAsync(logoutId);
+            if(string.IsNullOrEmpty(logoutRequest.PostLogoutRedirectUri))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return Redirect(logoutRequest.PostLogoutRedirectUri);
+
         }
 
         [HttpPost]
