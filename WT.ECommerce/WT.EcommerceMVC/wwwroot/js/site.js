@@ -4,6 +4,7 @@
     client_id: "WT.EcommerceClient_JS",
     response_type: "id_token token",
     redirect_uri: "https://localhost:44383/Home/signIn",
+    post_logout_redirect_uri: "https://localhost:44383/Home/OidcPage",
     scope: "openid EcommerceAdminAPI.admin WT.scope"
 };
 
@@ -12,6 +13,11 @@ var userManager = new Oidc.UserManager(config);
 
 var signIn = function () {
     userManager.signinRedirect();
+
+}
+
+var signOut = function () {
+    userManager.signoutRedirect();
 
 }
 userManager.getUser().then(user => {

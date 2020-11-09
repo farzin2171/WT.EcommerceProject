@@ -95,7 +95,7 @@ namespace WT.IdentityServer.Helper
                     RequireClientSecret=false,
                     RequirePkce=true,
                     RedirectUris={ "https://localhost:44383/Home/signIn" },
-                    PostLogoutRedirectUris={ "https://localhost:44383/Home/Index" },
+                    PostLogoutRedirectUris={ "https://localhost:44383/Home/OidcPage" },
                     AllowedCorsOrigins={"https://localhost:44383"},
                     AllowedScopes={
                                      "EcommerceAdminAPI.admin",
