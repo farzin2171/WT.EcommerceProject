@@ -47,6 +47,14 @@ namespace WT.IdentityServer
                     }
                     context.SaveChanges();
                 }
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in Configuration.GetApis())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
 
                 if (!context.ApiScopes.Any())
                 {
