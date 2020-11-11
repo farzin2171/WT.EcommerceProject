@@ -38,6 +38,7 @@ namespace WT.EcommerceMVC
                     config.Authority = "https://localhost:44355/";
                     config.ResponseType = "code";
                     config.SignedOutCallbackPath = "/Home/Index";
+                    config.UsePkce = true;
 
 
                     // configure cookie claim mapping

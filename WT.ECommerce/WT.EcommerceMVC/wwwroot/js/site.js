@@ -2,7 +2,7 @@
     userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),  //here we say where we can read data
     authority: "https://localhost:44355/",
     client_id: "WT.EcommerceClient_JS",
-    response_type: "id_token token",
+    response_type: "code",
     redirect_uri: "https://localhost:44383/Home/signIn",
     post_logout_redirect_uri: "https://localhost:44383/Home/OidcPage",
     scope: "openid EcommerceAdminAPI.admin WT.scope"

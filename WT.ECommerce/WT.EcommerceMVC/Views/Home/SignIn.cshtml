@@ -2,7 +2,8 @@
 <script>
 
     var userManger = new Oidc.UserManager({
-        userStore: new Oidc.WebStorageStateStore({ store: window.localStorage })  //here we say to Oidc where to save it
+        userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),  //here we say to Oidc where to save it
+        response_mode:"query"
     });
     userManger.signinCallback().then(res => {
         console.log(res);

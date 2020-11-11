@@ -70,6 +70,7 @@ namespace WT.IdentityServer.Helper
                     ClientId="WT.EcommerceClient_MVC",
                     ClientSecrets={new Secret("WT.EcommerceClient_MVC_secret".ToSha256())},
                     AllowedGrantTypes=GrantTypes.Code,
+                    RequirePkce=true,
                     RedirectUris={ "https://localhost:44383/signin-oidc" },
                     PostLogoutRedirectUris={ "https://localhost:44383/Home/Index" },
 
@@ -91,7 +92,7 @@ namespace WT.IdentityServer.Helper
                  new Client
                  {
                     ClientId="WT.EcommerceClient_JS",
-                    AllowedGrantTypes=GrantTypes.Implicit,
+                    AllowedGrantTypes=GrantTypes.Code,
                     RequireClientSecret=false,
                     RequirePkce=true,
                     RedirectUris={ "https://localhost:44383/Home/signIn" },
