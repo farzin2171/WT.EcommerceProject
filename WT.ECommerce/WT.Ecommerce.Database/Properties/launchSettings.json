@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WT.Ecommerce.Database": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "development"
+      }
+    }
+  }
+}
