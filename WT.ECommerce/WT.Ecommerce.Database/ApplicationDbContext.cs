@@ -16,6 +16,7 @@ namespace WT.Ecommerce.Database
         public DbSet<OrderStock> OrderStocks { get; set; }
         public DbSet<StockOnHold> stockOnHolds { get; set; }
         public DbSet<CustomerInformation> customerInformation { get; set; }
+        public DbSet<ProductImage> productImages { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Search all Configurations and apply them 
