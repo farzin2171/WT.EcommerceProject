@@ -3,9 +3,8 @@ using WT.Ecommerce.Domain.Enums;
 
 namespace WT.Ecommerce.Domain.Models
 {
-    public sealed class Order
+    public sealed class Order:BaseEntity
     {
-        public int Id { get; set; }
         public string OrderRef { get; set; }
         public string PaymentRef { get; set; }
         public int CustomerInformationId { get; set; }

@@ -1,8 +1,7 @@
 ﻿namespace WT.Ecommerce.Domain.Models
 {
-    public sealed class Stock
+    public sealed class Stock:BaseEntity
     {
-        public int Id { get; set; }
         public string Description { get; set; }
         public int Qty { get; set; }
         public int ProductId { get; set; }

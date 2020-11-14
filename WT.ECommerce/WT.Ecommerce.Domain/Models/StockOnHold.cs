@@ -2,10 +2,8 @@
 
 namespace WT.Ecommerce.Domain.Models
 {
-    public sealed class StockOnHold
+    public sealed class StockOnHold:BaseEntity
     {
-        public int Id { get; set; }
-
         public int StockId { get; set; }
         public Stock Stock { get; set; }
 

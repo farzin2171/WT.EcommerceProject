@@ -2,9 +2,8 @@
 
 namespace WT.Ecommerce.Domain.Models
 {
-    public sealed class Product
+    public sealed class Product:BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Value { get; set; }

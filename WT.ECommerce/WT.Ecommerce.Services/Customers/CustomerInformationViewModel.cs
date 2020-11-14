@@ -1,7 +1,8 @@
-﻿namespace WT.Ecommerce.Domain.Models
+﻿namespace WT.Ecommerce.Services.Customers
 {
-    public sealed class CustomerInformation:BaseEntity
+    public class CustomerInformationViewModel
     {
+        public int Id { get; set; }
         public string RefrenceId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

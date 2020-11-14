@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.EcommerceMVC", "WT.Ecomm
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8483A2CE-DF97-4184-B0B6-F688B00EF0C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.Ecommerce.Domain", "WT.Ecommerce.Domain\WT.Ecommerce.Domain.csproj", "{F2A65DD6-ECA6-42C1-8265-789D99CFA76D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.Ecommerce.Domain", "WT.Ecommerce.Domain\WT.Ecommerce.Domain.csproj", "{F2A65DD6-ECA6-42C1-8265-789D99CFA76D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.Ecommerce.Database", "WT.Ecommerce.Database\WT.Ecommerce.Database.csproj", "{71004F8E-7980-4D04-B775-1574B18753DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WT.Ecommerce.Database", "WT.Ecommerce.Database\WT.Ecommerce.Database.csproj", "{71004F8E-7980-4D04-B775-1574B18753DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WT.Ecommerce.Services", "WT.Ecommerce.Services\WT.Ecommerce.Services.csproj", "{F040C519-9346-4936-8894-3EB5BA4253E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{71004F8E-7980-4D04-B775-1574B18753DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71004F8E-7980-4D04-B775-1574B18753DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71004F8E-7980-4D04-B775-1574B18753DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F040C519-9346-4936-8894-3EB5BA4253E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F040C519-9346-4936-8894-3EB5BA4253E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F040C519-9346-4936-8894-3EB5BA4253E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F040C519-9346-4936-8894-3EB5BA4253E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F2A65DD6-ECA6-42C1-8265-789D99CFA76D} = {8483A2CE-DF97-4184-B0B6-F688B00EF0C1}
 		{71004F8E-7980-4D04-B775-1574B18753DD} = {8483A2CE-DF97-4184-B0B6-F688B00EF0C1}
+		{F040C519-9346-4936-8894-3EB5BA4253E4} = {8483A2CE-DF97-4184-B0B6-F688B00EF0C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39E49A6F-4D76-4EB8-AD30-080F5E5DF801}

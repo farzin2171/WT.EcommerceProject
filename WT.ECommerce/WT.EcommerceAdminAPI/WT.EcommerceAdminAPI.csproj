@@ -13,4 +13,8 @@
     <Folder Include="Helper\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WT.Ecommerce.Services\WT.Ecommerce.Services.csproj" />
+  </ItemGroup>
+
 </Project>
