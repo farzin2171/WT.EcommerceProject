@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WT.Ecommerce.Database;
+using WT.EcommerceAdminAPI.Middleware;
 
 namespace WT.EcommerceAdminAPI
 {
@@ -41,10 +42,12 @@ namespace WT.EcommerceAdminAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseCustomExceptionHandler();
+
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseRouting();
             app.UseCors("AllowAll");

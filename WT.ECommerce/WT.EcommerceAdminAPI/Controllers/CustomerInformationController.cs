@@ -33,6 +33,7 @@ namespace WT.EcommerceAdminAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Post(CustomerInformationViewModel input)
         {
+           
             return Ok(await _customerInformationService.Create(input));
         }
 
