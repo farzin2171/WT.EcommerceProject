@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using WT.Ecommerce.Database.Repositories.Interfaces;
+using WT.Ecommerce.Database.Specifications;
 using WT.Ecommerce.Domain.Models;
 
 namespace WT.Ecommerce.Services.Products
@@ -9,11 +11,15 @@ namespace WT.Ecommerce.Services.Products
     {
         private readonly IProductRepository _productRepository;
         private readonly IProductImageRepository _productImageRepository;
+        private readonly IStockRepository _stockRepository;
 
-        public ProductService(IProductRepository productRepository, IProductImageRepository productImageRepository)
+        public ProductService(IProductRepository productRepository,
+                              IProductImageRepository productImageRepository,
+                              IStockRepository stockRepository)
         {
             _productRepository = productRepository;
             _productImageRepository = productImageRepository;
+            _stockRepository = stockRepository;
         }
 
         public Task<ProductImage> AddImage(string name, string description,int productId)
@@ -26,20 +32,46 @@ namespace WT.Ecommerce.Services.Products
             });
         }
 
-        public Task<Domain.Models.Product> Create(ProductViewModel input)
+        public async Task<ProductResponse> Create(ProductRequest input)
         {
-            return _productRepository.AddAsync(new Domain.Models.Product
+            var Product=await _productRepository.AddAsync(new Product
             {
                 Name = input.Name,
                 Description = input.Description,
                 Value=input.Value,
                 ProductCategoryId = input.ProductCategoryId
             });
+
+            await _stockRepository.AddAsync(new Stock
+            {
+                ProductId = Product.Id,
+                Qty = input.Qty,
+                Description = $"{Product.Name}_Stock"
+
+            });
+
+            return new ProductResponse { Id=Product.Id};
         }
 
-        public Task<ProductQueryResult> GetPaged(int take, int skip, int? categoryId)
+        public async Task<ProductQueryResult> GetPaged(int limit, int skip,string name, int? categoryId)
         {
-            throw new NotImplementedException();
+            var latestProductSpecification = new LatestProductSpecification(name, categoryId, limit, skip);
+            var latestProducts = await _productRepository.ListAsync(latestProductSpecification);
+
+            var count = await _productRepository.CountAsync(new LatestProductSpecification(string.Empty, null, null, null));
+            return new ProductQueryResult
+            {
+                results = latestProducts.Select(p => new ProductResponse
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    CategoryName = p.ProductCategory.Name,
+                    Value = p.Value
+                }),
+                Links = new PaginationLinks("/api/v1/product", count, skip, limit)
+            };
+
         }
 
         public async Task RemoveImage(string name)

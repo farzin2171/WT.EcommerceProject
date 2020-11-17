@@ -11,6 +11,8 @@
             @this.AddTransient<WT.Ecommerce.Database.Repositories.Interfaces.ICustomerInfoRepository, WT.Ecommerce.Database.Repositories.Database.CustomerInformationRepository>();
             @this.AddTransient<WT.Ecommerce.Database.Repositories.Interfaces.IProductRepository, WT.Ecommerce.Database.Repositories.Database.ProductRepository>();
             @this.AddTransient<WT.Ecommerce.Database.Repositories.Interfaces.IProductImageRepository, WT.Ecommerce.Database.Repositories.Database.ProductImageRepository>();
+            @this.AddTransient<WT.Ecommerce.Database.Repositories.Interfaces.IStockRepository, WT.Ecommerce.Database.Repositories.Database.StockRepository>();
+
 
             return @this;
         }

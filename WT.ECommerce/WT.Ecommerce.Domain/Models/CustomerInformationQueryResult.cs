@@ -7,10 +7,5 @@ namespace WT.Ecommerce.Domain.Models
         public PaginationLinks Links { get; set; }
         public IReadOnlyList<CustomerInformation> results { get; set; }
     }
-
-    public class ProductQueryResult
-    {
-        public PaginationLinks Links { get; set; }
-        public IReadOnlyList<Product> results { get; set; }
-    }
+   
 }

@@ -5,8 +5,8 @@ namespace WT.Ecommerce.Services.Products
 {
     public interface IProductService
     {
-        Task<ProductQueryResult> GetPaged(int take, int skip,int? categoryId);
-        Task<Domain.Models.Product> Create(ProductViewModel input);
+        Task<ProductQueryResult> GetPaged(int limit, int skip,string name,int? categoryId);
+        Task<ProductResponse> Create(ProductRequest input);
         Task<ProductImage> AddImage(string name, string description,int productId);
         Task RemoveImage(string name);
     }
