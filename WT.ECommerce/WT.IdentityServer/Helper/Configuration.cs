@@ -108,8 +108,28 @@ namespace WT.IdentityServer.Helper
                      RequireConsent=false,
                      AllowAccessTokensViaBrowser=true,
                      AccessTokenLifetime=1800
+                 },
+                 new Client
+                 {
+                    ClientId="WT.EcommerceClient_FrontendAdmin",
+                    AllowedGrantTypes=GrantTypes.Code,
+                    RequireClientSecret=false,
+                    RequirePkce=true,
+                    RedirectUris={ "https://localhost:3000/Home/signIn" },
+                    PostLogoutRedirectUris={ "https://localhost:3000/Home/OidcPage" },
+                    AllowedCorsOrigins={"https://localhost:3000"},
+                    AllowedScopes={
+                                     "EcommerceAdminAPI.admin",
+                                     "EcommerceClientAPI.admin",
+                                     IdentityServerConstants.StandardScopes.OpenId,
+                                     IdentityServerConstants.StandardScopes.Profile,
+                                     "WT.scope"
+                                   },
+                     RequireConsent=false,
+                     AllowAccessTokensViaBrowser=true,
+                     AccessTokenLifetime=1800
                  }
-                 
+
             };
 
 
