@@ -6,3 +6,19 @@ dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c AppDbC
 dotnet ef database update -c AppDbContext
 dotnet ef database update -c PersistedGrantDbContext
 dotnet ef database update -c ConfigurationDbContext
+
+
+
+
+//https://docs.microsoft.com/en-us/archive/blogs/kaevans/using-powershell-with-certificates
+//Generate certificate
+
+$cert = New-SelfSignedCertificate -Subject "CN=IdentitiyServer" -CertStoreLocation cert:\CurrentUser\My -Provider "Microsoft Strong Cryptographic Provider"
+
+//Get your certificates
+Get-ChildItem -Path cert:\CurrentUser\My
+
+
+$cert = Get-ChildItem -Path cert:\CurrentUser\My | ?{$_.Subject -eq "CN=IdentitiyServer"}
+$cred = Get-Credential
+Export-PfxCertificate -Cert $cert -Password $cred.Password -FilePath "./identityServerCert.pfx"

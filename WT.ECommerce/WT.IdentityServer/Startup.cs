@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,10 +20,12 @@ namespace WT.IdentityServer
     public class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
+            _env = env;
         }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -53,6 +57,9 @@ namespace WT.IdentityServer
             });
 
             var assembly = typeof(Startup).Assembly.GetName().Name;
+            var filePath = Path.Combine(_env.ContentRootPath, "identityServerCert.pfx");
+            var certificate = new X509Certificate2(filePath,"farzin");
+
 
             //This will include Authontication and Authorization
             //Identity server setup infrustructer to use OpenId connect 
@@ -78,7 +85,8 @@ namespace WT.IdentityServer
                     options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
                      sql => sql.MigrationsAssembly(assembly));
                 })
-                .AddDeveloperSigningCredential();
+                .AddSigningCredential(certificate);
+                //.AddDeveloperSigningCredential();
                 services.AddControllersWithViews();
 
             //https://localhost:44365/.well-known/openid-configuration
