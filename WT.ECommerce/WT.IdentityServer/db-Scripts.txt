@@ -22,3 +22,21 @@ Get-ChildItem -Path cert:\CurrentUser\My
 $cert = Get-ChildItem -Path cert:\CurrentUser\My | ?{$_.Subject -eq "CN=IdentitiyServer"}
 $cred = Get-Credential
 Export-PfxCertificate -Cert $cert -Password $cred.Password -FilePath "./identityServerCert.pfx"
+
+
+
+//Generate certificate for react app
+
+$cert = Get-ChildItem -Path cert:\CurrentUser\My | ?{$_.Subject -eq "CN=IdentitiyServer"}
+$cred = Get-Credential
+$cred | Export-CliXml -Path "./key.cred"
+Export-PfxCertificate -Cert $cert -Password $cred.Password -FilePath "./identityServerCert.pfx"
+
+
+$InsertLineBreaks=1
+$oMachineCert=get-item Cert:\CurrentUser\My\5265C6455891815FDCA2707E7448C1A308919B46
+$oPem=new-object System.Text.StringBuilder
+$oPem.AppendLine("-----BEGIN CERTIFICATE-----")
+$oPem.AppendLine([System.Convert]::ToBase64String($oMachineCert.RawData,$InsertLineBreaks))
+$oPem.AppendLine("-----END CERTIFICATE-----")
+$oPem.ToString() | out-file ./identityServerCert.pem

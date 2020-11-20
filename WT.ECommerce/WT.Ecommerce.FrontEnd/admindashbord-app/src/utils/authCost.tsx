@@ -1,5 +1,4 @@
 import {WebStorageStateStore} from 'oidc-client'
-debugger;
  const { REACT_APP_AUTHORITY,
          REACT_APP_CLIENT_ID,
          REACT_APP_RESPONSE_TYPE,

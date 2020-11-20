@@ -6,7 +6,7 @@ type Props={
 }
 
 const SignIn:React.FC<Props>=({})=>{
-
+    debugger;
     var userManger = new UserManager({
         userStore: new WebStorageStateStore({ store: window.localStorage }),  //here we say to Oidc where to save it
         response_mode:"query"

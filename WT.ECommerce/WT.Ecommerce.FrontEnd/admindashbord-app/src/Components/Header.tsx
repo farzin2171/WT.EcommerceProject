@@ -4,17 +4,35 @@ import {UserManager} from 'oidc-client'
 import {IDENTITY_CONFIG} from '../utils/authCost'
 
 type Props={
-
+  isLoggedIn:boolean,
+  userName:string
 }
 
 const Header:React.FC<Props>=({
+    isLoggedIn,
+    userName
 })=>{
-    console.log(IDENTITY_CONFIG);
+   
     let userManager=new UserManager(IDENTITY_CONFIG)
     var signIn=()=>{
-        debugger;
         userManager.signinRedirect();
     }
+
+    var signOut=()=>{
+        userManager.getUser()
+        .then(user => {
+            if (user) {
+                return userManager.signoutRedirect();
+            } else {
+               
+                return user;
+            }
+        })
+        .catch(() => {
+            
+        });
+    }
+
     return (<div>
               <header>
                   <Navbar bg="light" variant="light" expand="lg" fixed="top">
@@ -23,7 +41,7 @@ const Header:React.FC<Props>=({
                      <Navbar.Collapse id="responsive-navbar-nav">
                        <Nav className="mr-auto">
                          <Navbar.Text>
-                            
+                           <span> {isLoggedIn?  (<span>Welcome  {userName}</span>):null }</span>
                          </Navbar.Text>
                        </Nav>
                        <Nav>
@@ -32,7 +50,8 @@ const Header:React.FC<Props>=({
                                  <NavDropdown.Item href="/">New Product</NavDropdown.Item>
                                  <NavDropdown.Item href="/">Product Categories</NavDropdown.Item>
                               </NavDropdown>
-                              <a className="nav-link text-dark" href="#" onClick={signIn} >Login</a>
+                              {!isLoggedIn? <a className="nav-link text-dark" href="#" onClick={signIn}><span className="glyphicon glyphicon-log-in">&nbsp;</span>Login</a> :null}
+                              {isLoggedIn? <a className="nav-link text-dark" href="#" onClick={signOut}><span className="glyphicon glyphicon-log-in">&nbsp;</span>Sign Out</a> :null}  
                        </Nav>
                      </Navbar.Collapse>
                   </Navbar>
