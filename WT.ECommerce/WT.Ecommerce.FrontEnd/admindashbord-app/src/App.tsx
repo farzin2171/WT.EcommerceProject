@@ -27,6 +27,7 @@ function App() {
           console.log(user)
           setLoggedIn(true);
           var username=user.profile.name ? user.profile.name.toString():"";
+          localStorage.setItem("access_token",user.access_token);
           setUserName(username);
         }
         else

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WT.Ecommerce.Services.Products;
@@ -8,6 +9,7 @@ namespace WT.EcommerceAdminAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
