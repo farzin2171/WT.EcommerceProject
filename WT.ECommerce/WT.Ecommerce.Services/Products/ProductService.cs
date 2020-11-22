@@ -69,7 +69,7 @@ namespace WT.Ecommerce.Services.Products
                     CategoryName = p.ProductCategory.Name,
                     Value = p.Value
                 }),
-                Links = new PaginationLinks("/api/v1/product", count, skip, limit)
+                Links = new PaginationLinks("product", count, skip, limit)
             };
 
         }

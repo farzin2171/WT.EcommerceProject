@@ -46,7 +46,7 @@ const Header:React.FC<Props>=({
                        </Nav>
                        <Nav>
                               <NavDropdown title="Product" id="collasible-nav-dropdown">
-                                 <NavDropdown.Item href="/dashboard">Product List</NavDropdown.Item>
+                                 <NavDropdown.Item href="/products">Product List</NavDropdown.Item>
                                  <NavDropdown.Item href="/">New Product</NavDropdown.Item>
                                  <NavDropdown.Item href="/">Product Categories</NavDropdown.Item>
                               </NavDropdown>
