@@ -8,7 +8,8 @@ const AuthContext = React.createContext({
     isAuthenticated: () => ({}),
     signinRedirect: () => ({}),
     signinSilentCallback: () => ({}),
-    createSigninRequest: () => ({})
+    createSigninRequest: () => ({}),
+    getUser:async()=>({}) 
 });
 
 export const AuthConsumer = AuthContext.Consumer;
