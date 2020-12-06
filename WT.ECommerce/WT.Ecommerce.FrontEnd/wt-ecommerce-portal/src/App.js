@@ -1,14 +1,15 @@
 import './App.css';
-import {IDENTITY_CONFIG} from './utils/authConst'
-import authService from './services/authService'
+import {AuthProvider} from './providers/authProvider';
+import {BrowserRouter} from 'react-router-dom'
+import {Routes} from './routes/routes'
+
 
 function App() {
-  const service=new authService();
-  service.signinRedirect();
-  console.log(IDENTITY_CONFIG);
   return (
     <div className="App">
-       
+         <AuthProvider>
+            <BrowserRouter children={Routes} basename={"/"}></BrowserRouter>
+         </AuthProvider>
     </div>
   );
 }

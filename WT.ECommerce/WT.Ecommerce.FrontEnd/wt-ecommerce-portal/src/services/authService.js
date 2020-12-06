@@ -35,7 +35,7 @@ export default class AuthService{
 
     //Methods
     navigateToScreen=()=>{
-        window.location.replace("/en/dashboard");
+        window.location.replace("/dashbord");
     };
 
     signinSilent=()=>{
@@ -57,12 +57,14 @@ export default class AuthService{
     }
 
     signinRedirectCallback=()=>{
+        debugger;
         this.UserManager.signinRedirectCallback().then(()=>{
             "";
         });
     };
 
     getUser=async()=>{
+    
         const user=await this.UserManager.getUser();
         if(!user){
             return await this.UserManager.signinRedirectCallback();
@@ -78,11 +80,14 @@ export default class AuthService{
     };
 
     signinRedirect=()=>{
+        debugger;
         localStorage.setItem("redirectUri",window.location.pathname);
         this.UserManager.signinRedirect({});
     }
 
     isAuthenticated=()=>{
+        debugger;
+        console.log('isAuthenticated called')
         const oidcStorage=JSON.parse(sessionStorage.getItem(`oidc.user:${process.env.REACT_APP_AUTHORITY}:${process.env.REACT_APP_CLIENT_ID}`));
 
         return (!!oidcStorage && !!oidcStorage.access_token);
