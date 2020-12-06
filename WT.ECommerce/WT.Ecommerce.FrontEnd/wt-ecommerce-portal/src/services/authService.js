@@ -59,12 +59,12 @@ export default class AuthService{
     signinRedirectCallback=()=>{
         debugger;
         this.UserManager.signinRedirectCallback().then(()=>{
-            "";
+            this.navigateToScreen();
         });
     };
 
     getUser=async()=>{
-    
+        debugger;  
         const user=await this.UserManager.getUser();
         if(!user){
             return await this.UserManager.signinRedirectCallback();

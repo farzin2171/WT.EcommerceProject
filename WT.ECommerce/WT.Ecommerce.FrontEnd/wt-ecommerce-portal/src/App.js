@@ -3,6 +3,7 @@ import {AuthProvider} from './providers/authProvider';
 import {BrowserRouter} from 'react-router-dom'
 import {Routes} from './routes/routes'
 import {Header} from './components/Header' 
+import {Footer} from './components/Footer'
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Header></Header>
             <BrowserRouter children={Routes} basename={"/"}></BrowserRouter>
          </AuthProvider>
+           <Footer></Footer>
     </div>
   );
 }
