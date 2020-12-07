@@ -48,6 +48,16 @@ export default class AuthService{
         });
     };
 
+    hocSiginSilent=(fn)=>{
+        this.UserManager.signinSilent()
+        .then((user)=>{
+            fn(user);
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
+    }
+
     signinSilentCallback=()=>{
         this.UserManager.signinSilentCallback();
     };
