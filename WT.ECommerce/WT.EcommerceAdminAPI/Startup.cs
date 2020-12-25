@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WT.Ecommerce.Database;
+using WT.Ecommerce.Domain.Models;
 using WT.EcommerceAdminAPI.Middleware;
 
 namespace WT.EcommerceAdminAPI
@@ -36,6 +37,8 @@ namespace WT.EcommerceAdminAPI
             services.AddHttpContextAccessor();
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddHttpContextAccessor();
+            services.AddTransient<IIdentityContext>(s => new IdentityContext(s.GetService<IHttpContextAccessor>().HttpContext?.User));
             services.AddControllers();
             services.AddApplicationServices();
         }

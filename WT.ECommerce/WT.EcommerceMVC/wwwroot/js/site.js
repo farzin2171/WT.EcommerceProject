@@ -5,7 +5,7 @@
     response_type: "code",
     redirect_uri: "https://localhost:44383/Home/signIn",
     post_logout_redirect_uri: "https://localhost:44383/Home/OidcPage",
-    scope: "openid EcommerceAdminAPI.admin WT.scope"
+    scope: "openid profile EcommerceAdminAPI.admin WT.scope"
 };
 
 
